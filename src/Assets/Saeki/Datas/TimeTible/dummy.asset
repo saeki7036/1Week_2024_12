@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1903f7821b13c084c82f96435e6ede27, type: 3}
   m_Name: dummy
   m_EditorClassIdentifier: 
-  Time: 0
-  spownPoints: []
-  EnemyObjects: []
+  spownTime: 0
+  spownInfos:
+  - spownPoint: {fileID: 0}
+    EnemyObject: {fileID: 0}
+  - spownPoint: {fileID: 0}
+    EnemyObject: {fileID: 0}
