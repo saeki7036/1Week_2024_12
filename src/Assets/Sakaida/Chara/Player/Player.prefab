@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2737092422810846638}
   - component: {fileID: 4678305228819512563}
   - component: {fileID: 7440764356969070129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageArea
   m_TagString: Player
   m_Icon: {fileID: 0}
