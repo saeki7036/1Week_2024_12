@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1903f7821b13c084c82f96435e6ede27, type: 3}
-  m_Name: dummy
+  m_Name: timetible
   m_EditorClassIdentifier: 
   spownTime: 0
   spownInfos: []
