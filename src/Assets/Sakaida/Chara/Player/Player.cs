@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Attack();
+        Bomb();
     }
     public  void TakeDamage(int value)
     {
@@ -120,7 +121,10 @@ public class Player : MonoBehaviour
 
     }
     void Bomb() 
-    { 
-    
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        { 
+        
+        }
     }
 }
