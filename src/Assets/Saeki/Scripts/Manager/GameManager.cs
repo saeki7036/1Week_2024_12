@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //staticパラメータを使用
+    static GameObject playerObject;
+
+    public static GameObject Getplayer => playerObject;
+
     enum GameState
     {
         Before,
@@ -13,15 +18,16 @@ public class GameManager : MonoBehaviour
     }
 
     GameState gameState;
-
+   
     public bool IsMainGameState => gameState == GameState.MainGame;
-    // Start is called before the first frame update
+    
     void Start()
     {
+        playerObject = GameObject.FindGameObjectWithTag("Player");
         gameState = GameState.MainGame;
     }
 
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         
