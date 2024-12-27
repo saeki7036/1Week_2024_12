@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] float Y_UpLimit;
     [SerializeField] float Y_DownLimit;
     [Space]
-    [SerializeField] GameObject Bullet;
+    [SerializeField] GameObject AttackScreen;
     [SerializeField] Vector2 BulletScale = new Vector2 (1, 1);
     int SuperPowerPoint = 0;
 
@@ -92,14 +94,24 @@ public class Player : MonoBehaviour
             {
                 audio.isPlaySE(Clip1);
                 AttackTimer = 0;
-                GameObject CL_Bullet = Instantiate(Bullet, transform.position, Quaternion.identity);
-                CL_Bullet.transform.position = new Vector2(transform.position.x, transform.position.y + BulletScale.y / 2);
-                CL_Bullet.transform.localScale = BulletScale;
 
-                Destroy(CL_Bullet, 0.1f);
+                AttackScreen.transform.position = new Vector2(transform.position.x, transform.position.y + BulletScale.y / 2);
+                AttackScreen.transform.localScale = BulletScale;
+
+                SetActiveAttackScreen();
             }
         }
     }
+
+    async void SetActiveAttackScreen()
+    {
+        var token = this.GetCancellationTokenOnDestroy();
+
+        AttackScreen.SetActive(true);
+        await UniTask.DelayFrame(10,cancellationToken: token);
+        AttackScreen.SetActive(false);
+    }
+
     void Active() 
     {
         Move();

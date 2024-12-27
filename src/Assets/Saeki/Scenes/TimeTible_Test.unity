@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 1181549392}
   - component: {fileID: 1181549391}
   - component: {fileID: 1181549390}
+  - component: {fileID: 1181549393}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -509,6 +510,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1181549393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181549389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f28d8253de77d4bae9e0b992ecb7d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeObjects:
+  - {fileID: 1423423752}
+--- !u!1 &1423423752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 729920863959904531, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
+  m_PrefabInstance: {fileID: 91348077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1746983666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -716,7 +736,7 @@ MonoBehaviour:
   X_LeftLimit: -8.5
   Y_UpLimit: 5
   Y_DownLimit: -5
-  Bullet: {fileID: 5897801174718179451, guid: a05a334271a236e4bad638228dae68d6, type: 3}
+  AttackScreen: {fileID: 0}
   BulletScale: {x: 5, y: 5}
   type: 0
   Clip1: {fileID: 8300000, guid: d8a87d9b89c5bfd4ab82fe11f963a593, type: 3}

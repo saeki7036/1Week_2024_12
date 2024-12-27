@@ -6,6 +6,8 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField]
+    int score = 50;
+    [SerializeField]
     float HP = 1;
     [SerializeField]
     protected float Speed = 0.1f;
@@ -26,6 +28,7 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void EnemyDead()
     {
+        GameManager.AddScore(score);
         Destroy(this.gameObject);
     }
    
