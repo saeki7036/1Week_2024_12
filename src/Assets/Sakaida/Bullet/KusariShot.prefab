@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3124674166406609339
+--- !u!1 &8187880928093786789
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2296827343925396459}
-  - component: {fileID: 1880758114278516179}
+  - component: {fileID: 6721315357151604679}
+  - component: {fileID: 3903961152218589025}
   m_Layer: 0
-  m_Name: WaveShot
+  m_Name: KusariShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2296827343925396459
+--- !u!4 &6721315357151604679
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3124674166406609339}
+  m_GameObject: {fileID: 8187880928093786789}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.927091, y: -1.9913223, z: -0.07702415}
+  m_LocalPosition: {x: -1.8537437, y: -1.4666117, z: -0.04803795}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1880758114278516179
+--- !u!114 &3903961152218589025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3124674166406609339}
+  m_GameObject: {fileID: 8187880928093786789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d141a8d9528b3d74c9aa6097c2539d01, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eed0c4e51ccd77428385c15f9637725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 25
-  bulletPrehab: {fileID: 3546533694708367423, guid: 99ee6d7a341fe024ea22aa33da115c5b, type: 3}
-  aimValue: 3500
+  Interval: 50
+  bulletPrehab: {fileID: 586804984419051942, guid: 2bc65943c706026469e6d4fb666830ee, type: 3}
+  BigBulletPrehab: {fileID: 7593123748669735788, guid: 1895b548fce40a549a4a6b9ec0227489, type: 3}
+  aimValue: 0
