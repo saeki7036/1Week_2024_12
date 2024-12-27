@@ -13,13 +13,16 @@ public class WaveShot : ShotPatarnBase
         for (int i = 0; i <= 5; i++)
         {
 
-            Vector2 dirTarget = target - enemyTransform.position;
+            //Vector2 dirTarget = target - enemyTransform.position;
+            Vector2 dirTarget = Vector3.zero - enemyTransform.position;
 
             GameObject bullet = Instantiate(bulletPrehab, enemyTransform.position, Quaternion.identity);
             Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
 
             float angleRadians = (aimValue * i) * Mathf.Deg2Rad;
             Vector2 rotate = Quaternion.Euler(Vector3.forward * angleRadians) * dirTarget.normalized;
+
+            bullet.transform.up = rotate;
 
             bulletRB.velocity = rotate;
         }
