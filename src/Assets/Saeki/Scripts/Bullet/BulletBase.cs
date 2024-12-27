@@ -83,6 +83,12 @@ public class BulletBase : MonoBehaviour
         }
     }
 
+    public void KillBullet()
+    {
+        GameManager.AddScore(score * ScaleScore());
+        DestroyBullet();
+    }
+
     public void SetScale()
     {
         GameManager.AddScore(score * ScaleScore());

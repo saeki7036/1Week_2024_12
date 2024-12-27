@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8578845185810469710}
   - component: {fileID: 7563326616174772248}
+  - component: {fileID: 4771368446898527698}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -57,8 +58,24 @@ MonoBehaviour:
   Y_DownLimit: -5
   AttackScreen: {fileID: 6048690505143105414}
   BulletScale: {x: 2, y: 1.5}
+  SuperAttacks:
+  - {fileID: 4771368446898527698}
   type: 0
   Clip1: {fileID: 8300000, guid: d8a87d9b89c5bfd4ab82fe11f963a593, type: 3}
+--- !u!114 &4771368446898527698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729920863959904531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898c2a621ec1cc540b3a838672299b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIAttackPrehab: {fileID: 4576877729660217857, guid: d27eba86aa3fefa4499b5c47c09cea4b, type: 3}
+  instantiatXPos: -10
 --- !u!1 &2855503808096349622
 GameObject:
   m_ObjectHideFlags: 0

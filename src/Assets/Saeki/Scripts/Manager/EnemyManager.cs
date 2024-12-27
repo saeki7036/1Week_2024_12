@@ -33,7 +33,8 @@ public class EnemyManager : MonoBehaviour
     bool SpownCheck(int time)
     {
         if (CurrentIndex >= MaxIndex) return false;
-        if (time > NextSpownTime) return false;
+
+        if (time <= NextSpownTime) return false;
 
         return true;
     }

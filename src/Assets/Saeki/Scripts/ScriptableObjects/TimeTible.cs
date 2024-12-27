@@ -19,12 +19,12 @@ public class TimeTible : ScriptableObject
     {
         [Tooltip("この値はキャラクターの出現位置を定義します。")]
         [SerializeField]
-        Transform spownPoint;
+        GameObject spownPoint;
         [Tooltip("この値は生成する敵オブジェクトを定義します。")]
         [SerializeField]
         GameObject EnemyObject;
 
-        public readonly Transform Point => spownPoint;
+        public readonly Transform Point => spownPoint.transform;
         public readonly GameObject Enemy => EnemyObject;
     }
 
