@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] Vector2 BulletScale = new Vector2 (1, 1);
     [SerializeField] SuperAttackBase[] SuperAttacks;
     int SuperPowerPoint = 0;
+    [SerializeField] Animator playerAnim;
 
     
     public enum TYPE 
@@ -65,21 +66,35 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        if (Input.GetKey(KeyCode.A)&&X_LeftLimit < transform.position.x) 
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            transform.position = new Vector2(transform.position.x-Speed*Time.deltaTime, transform.position.y);
+
+            if (Input.GetKey(KeyCode.A) && X_LeftLimit < transform.position.x)
+            {
+                playerAnim.SetInteger("Anim", 1);
+                transform.position = new Vector2(transform.position.x - Speed * Time.deltaTime, transform.position.y);
+            }
+            if (Input.GetKey(KeyCode.D) && X_RightLimit > transform.position.x)
+            {
+                playerAnim.SetInteger("Anim", 2);
+                transform.position = new Vector2(transform.position.x + Speed * Time.deltaTime, transform.position.y);
+            }
         }
-        if (Input.GetKey(KeyCode.D) && X_RightLimit > transform.position.x)
+        else 
         {
-            transform.position = new Vector2(transform.position.x + Speed * Time.deltaTime, transform.position.y);
+            playerAnim.SetInteger("Anim", 0);
         }
-        if (Input.GetKey(KeyCode.W) && Y_UpLimit > transform.position.y)
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y + Speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S) && Y_DownLimit < transform.position.y)
-        {
-            transform.position = new Vector2(transform.position.x, transform.position.y - Speed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.W) && Y_UpLimit > transform.position.y)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y + Speed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S) && Y_DownLimit < transform.position.y)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y - Speed * Time.deltaTime);
+            }
         }
     }
     void Attack() 
