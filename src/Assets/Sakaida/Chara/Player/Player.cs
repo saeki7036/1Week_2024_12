@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] GameObject AttackScreen;
     [SerializeField] Vector2 BulletScale = new Vector2 (1, 1);
+    [SerializeField] SuperAttackBase[] SuperAttacks;
     int SuperPowerPoint = 0;
     [SerializeField] Animator playerAnim;
 
@@ -123,7 +124,7 @@ public class Player : MonoBehaviour
         var token = this.GetCancellationTokenOnDestroy();
 
         AttackScreen.SetActive(true);
-        await UniTask.DelayFrame(10,cancellationToken: token);
+        await UniTask.DelayFrame(15,cancellationToken: token);
         AttackScreen.SetActive(false);
     }
 
@@ -150,8 +151,9 @@ public class Player : MonoBehaviour
     void Bomb() 
     {
         if (Input.GetKeyDown(KeyCode.LeftShift)) 
-        { 
-        
+        {
+            int number = UnityEngine.Random.Range(0, SuperAttacks.Length);
+            SuperAttacks[number].PlaySuperAttack();
         }
     }
 }

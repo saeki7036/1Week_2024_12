@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1903f7821b13c084c82f96435e6ede27, type: 3}
+  m_Name: timetible3400
+  m_EditorClassIdentifier: 
+  spownTime: 3400
+  spownInfos:
+  - spownPoint: {fileID: 5384046824457184298, guid: 6b98bd10e750ea945b607c8373f65dc9, type: 3}
+    EnemyObject: {fileID: 8193237872133338311, guid: 94c3e7adc49006b438382d38ed1b89f7, type: 3}
+  - spownPoint: {fileID: 7152542015619192710, guid: 832cd63cd7fe862488b2cb9107341cd2, type: 3}
+    EnemyObject: {fileID: 8193237872133338311, guid: 94c3e7adc49006b438382d38ed1b89f7, type: 3}
