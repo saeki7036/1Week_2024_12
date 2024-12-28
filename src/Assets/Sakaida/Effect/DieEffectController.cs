@@ -14,7 +14,7 @@ public class DieEffectController : MonoBehaviour
         for (int i = 0; i < 9; i++)
         {
             Timer = 0;
-            GameObject CL_Effect = Instantiate(Effect);
+            GameObject CL_Effect = Instantiate(Effect,transform.position,Quaternion.identity);
             Rigidbody2D rb = CL_Effect.GetComponent<Rigidbody2D>();
             random = Random.Range(0, 360);
 
