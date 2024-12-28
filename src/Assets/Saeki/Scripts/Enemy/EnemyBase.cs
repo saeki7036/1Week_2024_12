@@ -6,17 +6,18 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField]
-    int score = 50;
+    protected int score = 50;
     [SerializeField]
-    float HP = 1;
+    protected float HP = 1;
     [SerializeField]
     protected float Speed = 0.1f;
 
     protected int timeCount;
-
+    protected float maxHP;
     private void Start()
     {
-        timeCount = 0;
+        maxHP = HP;
+        timeCount = -200;
     }
 
     public void TakeDamage(float damage)
