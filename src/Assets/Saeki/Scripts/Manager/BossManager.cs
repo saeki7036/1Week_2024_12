@@ -41,6 +41,6 @@ public class BossManager : MonoBehaviour
     
     void GameClear()
     {
-        
+        Debug.Log("Unthi");
     }
 }

@@ -40,7 +40,8 @@ public class BossEnemyLeader : EnemyBase
     }
     void DamageColor()
     {
-        bossSpriteRenderer.color = new Color(1 - (maxHP / HP), 0, 0, 1);
+        float value = HP / maxHP;
+        bossSpriteRenderer.color = new Color(1, value, value, 1);
     }
     protected override void EnemyDead()
     {
