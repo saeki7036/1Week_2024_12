@@ -161,6 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd2d05885905ea4998ff5099505ffac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 50
   HP: 1
   Speed: 0.01
+  DieEffect: {fileID: 5942731708120311776, guid: 71e462ed3374ca84fb7cbe8bad6c88a7, type: 3}
   patarn: {fileID: 0}
