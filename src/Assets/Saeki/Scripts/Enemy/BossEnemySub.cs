@@ -26,7 +26,8 @@ public class BossEnemySub : EnemyBase
 
     void DamageColor()
     {
-        bossArmSpriteRenderer.color = new Color(1-(maxHP / HP),0,0,1);
+        float value = HP / maxHP;
+        bossArmSpriteRenderer.color = new Color(1, value, value, 1);
     }
     protected override void EnemyDead()
     {
