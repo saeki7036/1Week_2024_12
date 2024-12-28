@@ -12,6 +12,8 @@ public class BulletBase : MonoBehaviour
     protected float speed = 0.01f;
     [SerializeField]
     int score = 10;
+    [SerializeField]
+    GameObject BulletDieEffect;
 
     enum Scale
     {
@@ -87,6 +89,8 @@ public class BulletBase : MonoBehaviour
     {
         GameManager.AddScore(score * ScaleScore());
         DestroyBullet();
+
+        
     }
 
     public void SetScale()
@@ -103,6 +107,7 @@ public class BulletBase : MonoBehaviour
 
     void DestroyBullet()
     {
+        GameObject CL_BulletDieEffect = Instantiate(BulletDieEffect,transform.position,Quaternion.identity);
         Destroy(this.gameObject);
     }
 

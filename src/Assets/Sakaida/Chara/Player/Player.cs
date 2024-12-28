@@ -63,6 +63,13 @@ public class Player : MonoBehaviour
         
 
     }
+    public void AllLimitChange() 
+    {
+        X_RightLimit = 8.5f;
+        X_LeftLimit = -8.5f;
+        Y_UpLimit =5;
+        Y_DownLimit =-5;
+    }
 
     private void Move()
     {

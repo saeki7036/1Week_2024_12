@@ -11,6 +11,8 @@ public class EnemyBase : MonoBehaviour
     float HP = 1;
     [SerializeField]
     protected float Speed = 0.1f;
+    [SerializeField]
+    GameObject DieEffect;
 
     protected int timeCount;
 
@@ -28,6 +30,7 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void EnemyDead()
     {
+        GameObject CL_DieEffect = Instantiate(DieEffect,this.transform.position,Quaternion.identity);
         GameManager.AddScore(score);
         Destroy(this.gameObject);
     }

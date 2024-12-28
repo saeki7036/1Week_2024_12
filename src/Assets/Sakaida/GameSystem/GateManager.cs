@@ -12,6 +12,8 @@ public class GateManager : MonoBehaviour
 
     public float forceMagnitude = 10f;
 
+    [SerializeField] bool GameStartGate = true; 
+
     float Timer = 0;
     float EffectTimer = 0;
 
@@ -32,9 +34,11 @@ public class GateManager : MonoBehaviour
         {
             EffectTimer = 0;
 
-            GameObject CL_Effect = Instantiate(GateEffect);
+            GameObject CL_Effect = Instantiate(GateEffect,transform.position,Quaternion.identity);
             Destroy(CL_Effect, 0.2f);
             float angle = Random.Range(0f, 360f);
+
+
 
             float angleInRadians = angle * Mathf.Deg2Rad;
             Vector2 forceDirection = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
@@ -53,7 +57,14 @@ public class GateManager : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x+2, transform.localScale.y+2);
             if (Timer > 0.5) 
             {
-                SceneManager.LoadScene("Sakaida_Scene");
+                if (GameStartGate)
+                {
+                    SceneManager.LoadScene("Sakaida_Scene");
+                }
+                else
+                {
+                    SceneManager.LoadScene("Sakaida_StartScene");
+                }
             }
         }
         
