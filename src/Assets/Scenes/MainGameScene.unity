@@ -5080,7 +5080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3684902527187506586, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: PlayerArea
       objectReference: {fileID: 0}
     - target: {fileID: 4771368446898527698, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
       propertyPath: shakeInterval
