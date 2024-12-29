@@ -30,7 +30,7 @@ public class BombBlacks : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 
-                X = Random.Range(-8.5f, 8.5f);
+                X = Random.Range(-8.5f, 0);
                 Y = Random.Range(-5, 5);
                 GameObject CL_Black = Instantiate(Black);
                 CL_Black.transform.position = new Vector2(X, Y);

@@ -15,8 +15,8 @@ MonoBehaviour:
   spownTime: 3200
   spownInfos:
   - spownPoint: {fileID: 5384046824457184298, guid: 6b98bd10e750ea945b607c8373f65dc9, type: 3}
-    EnemyObject: {fileID: 8193237872133338311, guid: 94c3e7adc49006b438382d38ed1b89f7, type: 3}
+    EnemyObject: {fileID: 4725644572298087248, guid: 6c16fd70303782b449f9e0d1cbd7efc7, type: 3}
   - spownPoint: {fileID: 1185624489131927988, guid: eb20cd2c2f45c0c4ba2c7aed0e35aafd, type: 3}
-    EnemyObject: {fileID: 8193237872133338311, guid: 94c3e7adc49006b438382d38ed1b89f7, type: 3}
+    EnemyObject: {fileID: 4725644572298087248, guid: 6c16fd70303782b449f9e0d1cbd7efc7, type: 3}
   - spownPoint: {fileID: 7152542015619192710, guid: 832cd63cd7fe862488b2cb9107341cd2, type: 3}
-    EnemyObject: {fileID: 8193237872133338311, guid: 94c3e7adc49006b438382d38ed1b89f7, type: 3}
+    EnemyObject: {fileID: 4725644572298087248, guid: 6c16fd70303782b449f9e0d1cbd7efc7, type: 3}

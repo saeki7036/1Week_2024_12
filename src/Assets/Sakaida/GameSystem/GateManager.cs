@@ -59,7 +59,7 @@ public class GateManager : MonoBehaviour
             {
                 if (GameStartGate)
                 {
-                    SceneManager.LoadScene("Sakaida_Scene");
+                    SceneManager.LoadScene("MainGameScene");
                 }
                 else
                 {
@@ -71,7 +71,7 @@ public class GateManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("PlayerArea")) 
         {
             //SceneManager.LoadScene("Sakaida_Scene");
             GameStart = true;

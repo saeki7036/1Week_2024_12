@@ -8,6 +8,17 @@ public class UIAttackArea : MonoBehaviour
     [SerializeField]
     float MoveValue = 10f;
 
+    Player player;
+
+    void Start()
+    {
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null && playerObject.TryGetComponent<Player>(out var p))
+                player = p;
+        }
+    }
     public void MoveArea()
     {
         this.gameObject.SetActive(true);
@@ -24,11 +35,14 @@ public class UIAttackArea : MonoBehaviour
         if (collision.TryGetComponent<BulletBase>(out BulletBase bullet))
         {
             bullet.KillBullet();
+            player.AddPoint(5);
             return;
         }
         else if (collision.TryGetComponent<EnemyBase>(out EnemyBase enemy))
         {
             enemy.TakeDamage(200f);
+            player.AddPoint(10);
         }
+
     }
 }
