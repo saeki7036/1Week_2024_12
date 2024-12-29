@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
-
+using unityroom.Api;
 public class GameManager : MonoBehaviour
 {
     //staticパラメータを使用
@@ -74,7 +74,8 @@ public class GameManager : MonoBehaviour
 
         if (BossDard)
         {
-            clearScoreText.text = scoreText.text;
+            clearScoreText.text = Score.ToString();
+            UnityroomApiClient.Instance.SendScore(1, Score, ScoreboardWriteMode.HighScoreDesc);
             return GameState.Clear;
         }
            
