@@ -11,7 +11,7 @@ public class CheatEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TargetPoint = GameObject.Find("SliderPoint");
+        TargetPoint = GameObject.FindWithTag("SliderPoint");
     }
 
     // Update is called once per frame

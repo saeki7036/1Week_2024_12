@@ -102,6 +102,7 @@ MonoBehaviour:
   score: 100
   HP: 20
   Speed: 0.02
+  DieEffect: {fileID: 1166092453488227683, guid: 942d87d8ca2c4e843b4d36cbdf764418, type: 3}
   patarn: {fileID: 3570855395763434803, guid: 99e63aed12c8b6e40a82ed5b9d6ba5ed, type: 3}
 --- !u!58 &3999632899802481495
 CircleCollider2D:

@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] GameObject AudioPlayObj;
     [SerializeField] AudioClip BGM;
+    [SerializeField] float SEvol =1;
+    [SerializeField] float BGMvol = 0.5f;
 
     AudioSource BgmSource;
 
@@ -18,6 +20,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         BgmSource = GetComponent<AudioSource>();
+        BgmSource.volume = BGMvol;
         if (BGM != null)
         {
             BgmSource.clip = BGM;
@@ -44,7 +47,7 @@ public class AudioManager : MonoBehaviour
         GameObject CL_AudioPlay = Instantiate(AudioPlayObj);
 
         AudioPlay audio = CL_AudioPlay.GetComponent<AudioPlay>();
-        audio.isPlaySE(Clip);
+        audio.isPlaySE(Clip,SEvol);
 
         //CL_AudioPlay.isStatic = true;
         CL_AudioPlay.SetActive(true);
