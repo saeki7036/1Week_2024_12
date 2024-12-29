@@ -83,6 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIAttackPrehab: {fileID: 4576877729660217857, guid: d27eba86aa3fefa4499b5c47c09cea4b, type: 3}
   instantiatXPos: -10
+  UIShake: []
+  shakeInterval: 1
 --- !u!114 &3662756774319946839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +283,7 @@ GameObject:
   - component: {fileID: 7440764356969070129}
   m_Layer: 6
   m_Name: DamageArea
-  m_TagString: Untagged
+  m_TagString: PlayerArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
