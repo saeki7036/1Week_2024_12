@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d141a8d9528b3d74c9aa6097c2539d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 50
-  bulletPrehab: {fileID: 177135032375817284, guid: 2ae9e8ac3a5f56c4fa5058baf7e01af1, type: 3}
-  aimValue: 72
+  Interval: 25
+  bulletPrehab: {fileID: 3546533694708367423, guid: 99ee6d7a341fe024ea22aa33da115c5b, type: 3}
+  aimValue: 3500

@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +18,11 @@ public class Player : MonoBehaviour
     [SerializeField] float Y_UpLimit;
     [SerializeField] float Y_DownLimit;
     [Space]
-    [SerializeField] GameObject Bullet;
+    [SerializeField] GameObject AttackScreen;
     [SerializeField] Vector2 BulletScale = new Vector2 (1, 1);
+    [SerializeField] SuperAttackBase[] SuperAttacks;
     int SuperPowerPoint = 0;
+    [SerializeField] Animator playerAnim;
 
     
     public enum TYPE 
@@ -59,24 +63,45 @@ public class Player : MonoBehaviour
         
 
     }
+    public void AllLimitChange() 
+    {
+        X_RightLimit = 8.5f;
+        X_LeftLimit = -8.5f;
+        Y_UpLimit =5;
+        Y_DownLimit =-5;
+    }
 
     private void Move()
     {
-        if (Input.GetKey(KeyCode.A)&&X_LeftLimit < transform.position.x) 
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            transform.position = new Vector2(transform.position.x-Speed*Time.deltaTime, transform.position.y);
+
+            if (Input.GetKey(KeyCode.A) && X_LeftLimit < transform.position.x)
+            {
+                playerAnim.SetInteger("Anim", 1);
+                transform.position = new Vector2(transform.position.x - Speed * Time.deltaTime, transform.position.y);
+            }
+            if (Input.GetKey(KeyCode.D) && X_RightLimit > transform.position.x)
+            {
+                playerAnim.SetInteger("Anim", 2);
+                transform.position = new Vector2(transform.position.x + Speed * Time.deltaTime, transform.position.y);
+            }
         }
-        if (Input.GetKey(KeyCode.D) && X_RightLimit > transform.position.x)
+        else 
         {
-            transform.position = new Vector2(transform.position.x + Speed * Time.deltaTime, transform.position.y);
+            playerAnim.SetInteger("Anim", 0);
         }
-        if (Input.GetKey(KeyCode.W) && Y_UpLimit > transform.position.y)
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y + Speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S) && Y_DownLimit < transform.position.y)
-        {
-            transform.position = new Vector2(transform.position.x, transform.position.y - Speed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.W) && Y_UpLimit > transform.position.y)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y + Speed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S) && Y_DownLimit < transform.position.y)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y - Speed * Time.deltaTime);
+            }
         }
     }
     void Attack() 
@@ -92,14 +117,24 @@ public class Player : MonoBehaviour
             {
                 audio.isPlaySE(Clip1);
                 AttackTimer = 0;
-                GameObject CL_Bullet = Instantiate(Bullet, transform.position, Quaternion.identity);
-                CL_Bullet.transform.position = new Vector2(transform.position.x, transform.position.y + BulletScale.y / 2);
-                CL_Bullet.transform.localScale = BulletScale;
 
-                Destroy(CL_Bullet, 0.1f);
+                AttackScreen.transform.position = new Vector2(transform.position.x, transform.position.y + BulletScale.y / 2);
+                AttackScreen.transform.localScale = BulletScale;
+
+                SetActiveAttackScreen();
             }
         }
     }
+
+    async void SetActiveAttackScreen()
+    {
+        var token = this.GetCancellationTokenOnDestroy();
+
+        AttackScreen.SetActive(true);
+        await UniTask.DelayFrame(15,cancellationToken: token);
+        AttackScreen.SetActive(false);
+    }
+
     void Active() 
     {
         Move();
@@ -123,8 +158,9 @@ public class Player : MonoBehaviour
     void Bomb() 
     {
         if (Input.GetKeyDown(KeyCode.LeftShift)) 
-        { 
-        
+        {
+            int number = UnityEngine.Random.Range(0, SuperAttacks.Length);
+            SuperAttacks[number].PlaySuperAttack();
         }
     }
 }

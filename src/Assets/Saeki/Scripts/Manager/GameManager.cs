@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     public static GameObject Getplayer => playerObject;
 
+    static int Score;
+    public int GetScore => Score;
+    public static void AddScore(int add) => Score += add;
     enum GameState
     {
         Before,
@@ -23,6 +27,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
+        Score = 0;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         gameState = GameState.MainGame;
     }
