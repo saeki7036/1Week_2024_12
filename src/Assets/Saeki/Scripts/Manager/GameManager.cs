@@ -20,21 +20,55 @@ public class GameManager : MonoBehaviour
         Clear,
         GameOvar
     }
-
+    [SerializeField]
     GameState gameState;
    
     public bool IsMainGameState => gameState == GameState.MainGame;
-    
+    public bool IsGameClear => gameState == GameState.Clear;
+
+    [SerializeField]
+    Player playerScript;
+
+    [SerializeField]
+    GameObject finishAnimartionObject;
+
+    bool BossDard;
+
+    public void BosskillFlag() => BossDard = true; 
+
     void Start()
     {
         Score = 0;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         gameState = GameState.MainGame;
+        BossDard = false;
     }
 
+     
     
     void FixedUpdate()
     {
-        
+        gameState = stateChange();
+        if (IsGameClear) PlayFinishAnimation();
+    }
+
+    void PlayFinishAnimation()
+    {
+        if(finishAnimartionObject.activeSelf == false)
+            finishAnimartionObject.SetActive(true);
+    }
+
+    GameState stateChange()
+    {
+        if (gameState != GameState.MainGame)
+            return gameState;
+
+        if(playerScript.IsDard)
+            return GameState.GameOvar;
+
+        if(BossDard)
+            return GameState.Clear;
+
+        return GameState.MainGame;
     }
 }

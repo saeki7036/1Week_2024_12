@@ -41,6 +41,8 @@ public class BossManager : MonoBehaviour
     
     void GameClear()
     {
-        Debug.Log("Unthi");
+        GameManager manager = GameObject.FindWithTag("Manager").GetComponent<GameManager>();
+        if (manager != null)
+            manager.BosskillFlag();
     }
 }

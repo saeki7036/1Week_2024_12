@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     int SuperPowerPoint = 0;
     [SerializeField] Animator playerAnim;
 
-    
+    public bool IsDard => HP <= 0;
     public enum TYPE 
     { 
     Active,
