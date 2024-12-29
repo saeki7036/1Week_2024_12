@@ -13,6 +13,10 @@ public class EnemyBase : MonoBehaviour
     protected float Speed = 0.1f;
     [SerializeField]
     GameObject DieEffect;
+    [SerializeField]
+    AudioClip DieClip;
+
+    AudioManager Audio => AudioManager.instance;
 
     protected int timeCount;
     protected float maxHP;
@@ -31,6 +35,14 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void EnemyDead()
     {
+        if (DieClip != null)
+        {
+            Audio.isPlaySE(DieClip);
+        }
+        else 
+        {
+            Debug.Log("Ž€–SŽžŒø‰Ê‰¹‚ª“ü‚Á‚Ä‚¢‚Ü‚¹‚ñ");
+        }
         GameObject CL_DieEffect = Instantiate(DieEffect,this.transform.position,Quaternion.identity);
         GameManager.AddScore(score);
         Destroy(this.gameObject);

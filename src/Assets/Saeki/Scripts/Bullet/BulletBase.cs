@@ -14,6 +14,8 @@ public class BulletBase : MonoBehaviour
     int score = 10;
     [SerializeField]
     GameObject BulletDieEffect;
+    [SerializeField]
+    AudioClip DieClip;
 
     enum Scale
     {
@@ -26,6 +28,7 @@ public class BulletBase : MonoBehaviour
     [SerializeField]
     Scale scale = Scale.normal;
 
+    AudioManager audio => AudioManager.instance;
 
     protected Vector3 vector;
 
@@ -107,6 +110,15 @@ public class BulletBase : MonoBehaviour
 
     void DestroyBullet()
     {
+        if (DieClip != null)
+        {
+            audio.isPlaySE(DieClip);
+        }
+        else 
+        {
+            Debug.Log("‰¹‚ªƒZƒbƒg‚³‚ê‚Ä‚È‚¢‚æ");
+        }
+
         GameObject CL_BulletDieEffect = Instantiate(BulletDieEffect,transform.position,Quaternion.identity);
         Destroy(this.gameObject);
     }
