@@ -849,7 +849,7 @@ MonoBehaviour:
 
     SPACE:Attack
 
-    LSHIFT:SpaceATTACK
+    LSHIFT:SpecialAttack
 
 '
   m_isRightToLeft: 0
