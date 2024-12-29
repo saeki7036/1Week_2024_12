@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class ShotBigHorming : ShotPatarnBase
@@ -40,6 +41,9 @@ public class ShotBigHorming : ShotPatarnBase
     {
         for (int i = 3; i <= 33; i++)
         {
+            if (enemyTransform == null)
+                break;
+
             Vector2 dirTarget = target - enemyTransform.position;
 
             GameObject bullet = Instantiate(bulletSmall, enemyTransform.position, Quaternion.identity);
