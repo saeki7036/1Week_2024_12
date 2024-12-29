@@ -165,4 +165,5 @@ MonoBehaviour:
   speed: 3
   score: 10
   BulletDieEffect: {fileID: 3919228783090798567, guid: f5988be2ae7cc584e9e140e76c2392c9, type: 3}
+  DieClip: {fileID: 8300000, guid: 5bf01d50dca52e948876d8b24a9f3fa8, type: 3}
   scale: 0

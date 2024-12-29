@@ -165,4 +165,5 @@ MonoBehaviour:
   HP: 1
   Speed: 0.01
   DieEffect: {fileID: 5942731708120311776, guid: 71e462ed3374ca84fb7cbe8bad6c88a7, type: 3}
+  DieClip: {fileID: 8300000, guid: 595f852ffd84310428903abf06def0ba, type: 3}
   patarn: {fileID: 0}

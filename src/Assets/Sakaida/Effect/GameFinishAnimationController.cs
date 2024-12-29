@@ -39,7 +39,7 @@ public class GameFinishAnimationController : MonoBehaviour
                 if (BombWhite.transform.localScale.x < 30)
                 {
                     Gate.SetActive(true);
-                    SGate.SetActive(true);
+                    //SGate.SetActive(true);
                     BombWhite.transform.localScale = new Vector2(BombWhite.transform.localScale.x + ScaleUpSpeed * Time.deltaTime, BombWhite.transform.localScale.y + ScaleUpSpeed * Time.deltaTime);
                     BombWhite.transform.position = new Vector2(-4.25f, 3.5f);
                     BombWhite.SetActive(true);
