@@ -156,6 +156,11 @@ Transform:
   - {fileID: 428265191}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &96679215 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4424763011993340800, guid: 37eed93387b66994ba73c065c9be7146, type: 3}
+  m_PrefabInstance: {fileID: 1532654866}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &103147397 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6496405646857497356, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
@@ -671,7 +676,6 @@ MonoBehaviour:
   BigScoreUI: {fileID: 254936965}
   player: {fileID: 1205654692}
   Gate: {fileID: 622584724}
-  SGate: {fileID: 0}
   UIs:
   - {fileID: 1651346565}
   - {fileID: 1070292011}
@@ -3209,7 +3213,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1390753264
 MonoBehaviour:
@@ -4148,8 +4152,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -4.9999847, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1973418760
 GameObject:
@@ -4779,6 +4783,18 @@ PrefabInstance:
     - target: {fileID: 5072175653846113805, guid: 586e5ed68a6d268489899445533366ba, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003059976920097660, guid: 586e5ed68a6d268489899445533366ba, type: 3}
+      propertyPath: BGM
+      value: 
+      objectReference: {fileID: 8300000, guid: fb1f206af87a9da4baafe94b9d23c17a, type: 3}
+    - target: {fileID: 9003059976920097660, guid: 586e5ed68a6d268489899445533366ba, type: 3}
+      propertyPath: SEvol
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003059976920097660, guid: 586e5ed68a6d268489899445533366ba, type: 3}
+      propertyPath: BGMvol
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9209891926137645042, guid: 586e5ed68a6d268489899445533366ba, type: 3}
       propertyPath: m_LocalPosition.x
