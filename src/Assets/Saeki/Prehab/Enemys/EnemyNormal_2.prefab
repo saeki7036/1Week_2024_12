@@ -165,8 +165,8 @@ MonoBehaviour:
   score: 100
   HP: 1
   Speed: 0.01
-  DieEffect: {fileID: 1166092453488227683, guid: 942d87d8ca2c4e843b4d36cbdf764418, type: 3}
-  DieClip: {fileID: 0}
+  DieEffect: {fileID: 5942731708120311776, guid: 71e462ed3374ca84fb7cbe8bad6c88a7, type: 3}
+  DieClip: {fileID: 8300000, guid: 595f852ffd84310428903abf06def0ba, type: 3}
   patarn: {fileID: 5996464464219956572, guid: 4cb9f15cdbe62ff46999f55b1706b50a, type: 3}
 --- !u!1001 &2586286726594820204
 PrefabInstance:

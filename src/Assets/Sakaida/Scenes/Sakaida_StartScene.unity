@@ -1009,6 +1009,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3684902527187506586, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
+      propertyPath: m_TagString
+      value: PlayerArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563326616174772248, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
+      propertyPath: HP
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7563326616174772248, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
       propertyPath: X_LeftLimit
       value: -8

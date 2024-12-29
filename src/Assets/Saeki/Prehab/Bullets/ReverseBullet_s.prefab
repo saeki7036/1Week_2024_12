@@ -164,7 +164,7 @@ MonoBehaviour:
   rb2D: {fileID: 1977694300326282065}
   speed: 1
   score: 10
-  BulletDieEffect: {fileID: 1166092453488227683, guid: 942d87d8ca2c4e843b4d36cbdf764418, type: 3}
+  BulletDieEffect: {fileID: 3919228783090798567, guid: f5988be2ae7cc584e9e140e76c2392c9, type: 3}
   DieClip: {fileID: 0}
   scale: 2
   Interval: 2

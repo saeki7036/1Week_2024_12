@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 10000
-  HP: 1000
+  HP: 1500
   Speed: 0.1
   DieEffect: {fileID: 0}
   DieClip: {fileID: 0}
@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1000
-  HP: 300
+  HP: 600
   Speed: 0.1
   DieEffect: {fileID: 0}
   DieClip: {fileID: 0}
@@ -860,7 +860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1000
-  HP: 300
+  HP: 600
   Speed: 0.1
   DieEffect: {fileID: 0}
   DieClip: {fileID: 0}
@@ -1249,11 +1249,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1000
-  HP: 300
+  HP: 600
   Speed: 0.1
   DieEffect: {fileID: 0}
   DieClip: {fileID: 0}
-  patarn: {fileID: 5996464464219956572, guid: 4cb9f15cdbe62ff46999f55b1706b50a, type: 3}
+  patarn: {fileID: 5245331553808030506, guid: 5e5fc75e00521bb4e91bde0d9e76292a, type: 3}
   shottingTransform: {fileID: 7643145220613552760}
   bossArmSpriteRenderer: {fileID: 3696755655383591753}
 --- !u!61 &8914838378134791705
@@ -1514,11 +1514,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1000
-  HP: 300
+  HP: 600
   Speed: 0.1
   DieEffect: {fileID: 0}
   DieClip: {fileID: 0}
-  patarn: {fileID: 5996464464219956572, guid: 4cb9f15cdbe62ff46999f55b1706b50a, type: 3}
+  patarn: {fileID: 5245331553808030506, guid: 5e5fc75e00521bb4e91bde0d9e76292a, type: 3}
   shottingTransform: {fileID: 641981029672901899}
   bossArmSpriteRenderer: {fileID: 8173438863056370157}
 --- !u!61 &6725853715772638599

@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5f24f61c67a1f4da8ba842dde7c8e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 3
+  HP: 1
   Speed: 2
   AttackIntreval: 0.5
   DamageIntreval: 1
@@ -64,6 +64,9 @@ MonoBehaviour:
   - {fileID: 4771368446898527698}
   - {fileID: 3662756774319946839}
   playerAnim: {fileID: 6496405646857497356}
+  SuperPowerSlider: {fileID: 0}
+  Casets: []
+  dieEffect: {fileID: 0}
   type: 0
   Clip1: {fileID: 8300000, guid: d8a87d9b89c5bfd4ab82fe11f963a593, type: 3}
 --- !u!114 &4771368446898527698
@@ -92,6 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4533dce0295024e9f26d93062a20ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Black: {fileID: 3211633912459422793, guid: 591ae518338302e4984716f350fafcd5, type: 3}
+  screenValue: 20
+  interval: 0.03
 --- !u!1 &2855503808096349622
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +281,7 @@ GameObject:
   - component: {fileID: 7440764356969070129}
   m_Layer: 6
   m_Name: DamageArea
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -698,6 +704,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4889333865854082756, guid: a05a334271a236e4bad638228dae68d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 7563326616174772248}
     - target: {fileID: 5897801174718179451, guid: a05a334271a236e4bad638228dae68d6, type: 3}
       propertyPath: m_Name
       value: Attack

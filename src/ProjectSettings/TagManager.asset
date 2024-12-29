@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SliderPoint
   - Manager
+  - PlayerArea
   layers:
   - Default
   - TransparentFX
