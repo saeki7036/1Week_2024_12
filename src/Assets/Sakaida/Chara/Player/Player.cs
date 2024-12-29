@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     int SuperPowerPoint = 0;
     [SerializeField] Animator[] Casets;
     [SerializeField] GameObject dieEffect;
+    [SerializeField] TextMeshProUGUI PowerPointText;
     public void AddPoint(int point) => SuperPowerPoint += point;
     public bool IsDard => HP <= 0;
     public enum TYPE 
@@ -68,6 +70,12 @@ public class Player : MonoBehaviour
 
         }
 
+        if (PowerPointText != null)
+        {
+            PowerPointText.text = SuperPowerPoint.ToString();
+            PowerPointText.color = SuperPowerPoint > 100 ? Color.magenta : Color.white;
+        }
+       
         SuperPowerChenge();
     }
 
@@ -168,10 +176,27 @@ public class Player : MonoBehaviour
     }
     public  void TakeDamage(int value)
     {
-        HP -= value;
-        if(HP > -1)
-        Casets[HP]?.SetInteger("Anim", 1);
+        if (value == 0)
+        {
+            if (SuperPowerPoint >= 100)
+                SuperPowerPoint -= 100;
+            else
+            {
+                HP -= 1;
+                if (HP > -1)
+                    Casets[HP]?.SetInteger("Anim", 1);
+            }        
+        }
+        else
+        {
+            if (SuperPowerPoint >= 100)
+                SuperPowerPoint = 100;
 
+            HP -= value;
+            if (HP > -1)
+                Casets[HP]?.SetInteger("Anim", 1);
+        }
+       
         if (HP < 0) 
         {
             Die();
@@ -188,7 +213,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && HP >= 2) 
         {
-            TakeDamage(1);
+            TakeDamage(0);
             int number = UnityEngine.Random.Range(0, SuperAttacks.Length);
             SuperAttacks[number].PlaySuperAttack();
         }
