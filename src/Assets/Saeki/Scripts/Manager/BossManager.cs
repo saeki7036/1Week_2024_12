@@ -31,6 +31,7 @@ public class BossManager : MonoBehaviour
         await UniTask.WaitUntil(() => bossSub[i].IsDestroyed());
 
         bossEnemyObject.layer = LayerMask.NameToLayer("Enemy");
+        bossEnemy.SetSuperMode();
     }
 
     async void bossDeadCheck()

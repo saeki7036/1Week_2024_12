@@ -10,23 +10,28 @@ public class BossEnemyLeader : EnemyBase
     [SerializeField] SpriteRenderer bossSpriteRenderer;
     int patarnChengeCount = 0;
 
+    bool superMode = false;
+
+    public void SetSuperMode() => superMode = true;
     ShotPatarnBase currentPatarn;
     ShotPatarnBase PatarnChenge() => patarns[Random.Range(0, patarns.Length)];
 
     protected override void EnemyUpDate()
     {
-
-
         patarnChengeCount++;
-        if(patarnChengeCount >= patarnChengeInterval)
+        if (currentPatarn == null)
+            currentPatarn = PatarnChenge();
+
+        if (patarnChengeCount >= patarnChengeInterval)
         {
-            patarnChengeCount++;
-            if (currentPatarn == null)
-                currentPatarn = PatarnChenge();
+            patarnChengeCount = 0;
+            currentPatarn = PatarnChenge();
         }
 
-        if (currentPatarn != null && currentPatarn.PatarnCeangeLimit(timeCount))
+        if (currentPatarn != null && currentPatarn.PatarnCeangeLimit(timeCount))     
             BulletShot();
+        
+           
 
         if (this.gameObject.activeSelf)
         {
@@ -36,7 +41,12 @@ public class BossEnemyLeader : EnemyBase
     void BulletShot()
     {
         timeCount = 0;
-        currentPatarn.PatarnPlay(this.transform);
+
+        if (superMode)  
+            foreach (ShotPatarnBase Patarn in patarns)
+                Patarn.PatarnPlay(this.transform);     
+        else
+            currentPatarn.PatarnPlay(this.transform);
     }
     void DamageColor()
     {
