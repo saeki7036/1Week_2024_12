@@ -4928,6 +4928,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 103147397}
     - target: {fileID: 7563326616174772248, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
+      propertyPath: BulletScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563326616174772248, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
+      propertyPath: BulletScale.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563326616174772248, guid: b963148b42dd9e64cb9a0fea50a55160, type: 3}
       propertyPath: SuperPowerSlider
       value: 
       objectReference: {fileID: 1070292013}

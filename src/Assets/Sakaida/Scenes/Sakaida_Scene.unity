@@ -3694,7 +3694,7 @@ GameObject:
   - component: {fileID: 2043945929}
   m_Layer: 0
   m_Name: SliderPoint
-  m_TagString: Untagged
+  m_TagString: SliderPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3978,6 +3978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af5b654cfb41ba49bbad56770cac072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   Panimator: {fileID: 659882494}
   PFinish: {fileID: 845240975}
 --- !u!114 &2145061012
@@ -3993,8 +3994,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  playerScript: {fileID: 0}
+  playerScript: {fileID: 1205654692}
   finishAnimartionObject: {fileID: 0}
+  scoreText: {fileID: 0}
+  clearScoreText: {fileID: 0}
 --- !u!1001 &1408556385594614454
 PrefabInstance:
   m_ObjectHideFlags: 0
