@@ -15,4 +15,4 @@ MonoBehaviour:
   spownTime: 700
   spownInfos:
   - spownPoint: {fileID: 1185624489131927988, guid: eb20cd2c2f45c0c4ba2c7aed0e35aafd, type: 3}
-    EnemyObject: {fileID: 8193237872133338311, guid: 94c3e7adc49006b438382d38ed1b89f7, type: 3}
+    EnemyObject: {fileID: 4725644572298087248, guid: 6c16fd70303782b449f9e0d1cbd7efc7, type: 3}

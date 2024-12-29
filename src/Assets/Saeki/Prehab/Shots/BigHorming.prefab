@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff1440743995cb941a8b0c2243a87526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 70
+  Interval: 200
   bulletSmall: {fileID: 177135032375817284, guid: 4499fd024e036c243b4046c8a1091e3c, type: 3}
   bulletLarge: {fileID: 2245274868930637758, guid: cea7b5e304b33914cbeff1d82cae31f9, type: 3}
   aimValue: 560

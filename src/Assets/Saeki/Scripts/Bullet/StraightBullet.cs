@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StraightBullet : BulletBase
 {
-    Vector3 forcas = Vector3.zero;
+    //Vector3 forcas = Vector3.zero;
     protected override void BulletSetUp()
     {
         Vector2 velocity = rb2D.velocity;
