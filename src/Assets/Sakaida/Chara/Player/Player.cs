@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -21,9 +22,12 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject AttackScreen;
     [SerializeField] Vector2 BulletScale = new Vector2 (1, 1);
     [SerializeField] SuperAttackBase[] SuperAttacks;
-    int SuperPowerPoint = 0;
     [SerializeField] Animator playerAnim;
-
+    [SerializeField] Slider SuperPowerSlider;
+    int SuperPowerPoint = 0;
+    [SerializeField] Animator[] Casets;
+    [SerializeField] GameObject dieEffect;
+    public void AddPoint(int point) => SuperPowerPoint += point;
     public bool IsDard => HP <= 0;
     public enum TYPE 
     { 
@@ -41,7 +45,11 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(Casets.Length != 0)
+        {
+            Casets[0]?.SetInteger("Anim", 0);
+            Casets[1]?.SetInteger("Anim", 0);
+        }     
     }
 
     // Update is called once per frame
@@ -60,8 +68,25 @@ public class Player : MonoBehaviour
 
         }
 
-        
+        SuperPowerChenge();
+    }
 
+    void SuperPowerChenge()
+    {
+        if (SuperPowerSlider == null)
+            return;
+        if (SuperPowerPoint >= 100)
+        {
+            
+            if (HP < 3)
+            {
+                Casets[HP]?.SetInteger("Anim", 0);
+                HP++;
+                SuperPowerPoint -= 100;
+            }
+                
+        }
+        SuperPowerSlider.value = SuperPowerPoint;
     }
     public void AllLimitChange() 
     {
@@ -144,21 +169,26 @@ public class Player : MonoBehaviour
     public  void TakeDamage(int value)
     {
         HP -= value;
+        if(HP > -1)
+        Casets[HP]?.SetInteger("Anim", 1);
+
         if (HP < 0) 
         {
             Die();
         }
     }
-    private void Die()
+    private async void Die()
     {
-
-        Debug.Log("SinDAAAAAAAAAAAAAAAAAAAAAAA");
-
+        GameObject effect = Instantiate(dieEffect, transform.position, Quaternion.identity);
+        var token = this.GetCancellationTokenOnDestroy();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
+        this.gameObject.SetActive(false);
     }
     void Bomb() 
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && HP >= 2) 
         {
+            TakeDamage(1);
             int number = UnityEngine.Random.Range(0, SuperAttacks.Length);
             SuperAttacks[number].PlaySuperAttack();
         }

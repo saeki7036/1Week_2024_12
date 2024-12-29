@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -18,20 +19,24 @@ public class GameManager : MonoBehaviour
         Before,
         MainGame,
         Clear,
-        GameOvar
+        GameOver
     }
     [SerializeField]
     GameState gameState;
    
     public bool IsMainGameState => gameState == GameState.MainGame;
     public bool IsGameClear => gameState == GameState.Clear;
-
+    public bool IsGameOver => gameState == GameState.GameOver;
     [SerializeField]
     Player playerScript;
 
     [SerializeField]
     GameObject finishAnimartionObject;
 
+    [SerializeField] 
+    TextMeshProUGUI scoreText;
+    [SerializeField] 
+    TextMeshProUGUI clearScoreText;
     bool BossDard;
 
     public void BosskillFlag() => BossDard = true; 
@@ -48,6 +53,7 @@ public class GameManager : MonoBehaviour
     
     void FixedUpdate()
     {
+        scoreText.text = Score.ToString();
         gameState = stateChange();
         if (IsGameClear) PlayFinishAnimation();
     }
@@ -64,10 +70,14 @@ public class GameManager : MonoBehaviour
             return gameState;
 
         if(playerScript.IsDard)
-            return GameState.GameOvar;
+            return GameState.GameOver;
 
-        if(BossDard)
+        if (BossDard)
+        {
+            clearScoreText.text = scoreText.text;
             return GameState.Clear;
+        }
+           
 
         return GameState.MainGame;
     }
