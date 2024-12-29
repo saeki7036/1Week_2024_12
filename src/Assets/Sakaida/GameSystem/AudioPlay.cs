@@ -20,8 +20,9 @@ public class AudioPlay : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void isPlaySE(AudioClip Clip)
+    public void isPlaySE(AudioClip Clip , float vol)
     {
+        Asource.volume = vol;
         Asource.clip = Clip;
         Asource.Play();
     }
