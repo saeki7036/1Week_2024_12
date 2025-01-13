@@ -5,15 +5,15 @@ using UnityEngine;
 public class DieEffectController : MonoBehaviour
 {
     [SerializeField] GameObject Effect;
-    float Timer = 0;
-    int count = 0;
+    //float Timer = 0;
+    //int count = 0;
     float random = 0;
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < 9; i++)
         {
-            Timer = 0;
+            //Timer = 0;
             GameObject CL_Effect = Instantiate(Effect,transform.position,Quaternion.identity);
             Rigidbody2D rb = CL_Effect.GetComponent<Rigidbody2D>();
             random = Random.Range(0, 360);

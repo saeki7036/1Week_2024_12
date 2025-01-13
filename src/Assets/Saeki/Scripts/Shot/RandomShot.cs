@@ -28,7 +28,10 @@ public class RandomShot : ShotPatarnBase
 
     void OtherPatarnPlay(Transform enemyTransform)
     {
+        if (GameManager.Getplayer == null) return;
+
         Vector3 target = GameManager.Getplayer.transform.position;
+
         for (int i = 0; i < OneSetBulletCount; i++)
         {
             if (enemyTransform == null)

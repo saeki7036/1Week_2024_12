@@ -17,10 +17,10 @@ public class UIShake : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
+#if UNITY_EDITOR
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.U)) { OneShake(); }
+        if (Input.GetKeyDown(KeyCode.U)) { OneShake(); }
     }
+#endif
 }

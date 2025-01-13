@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI clearScoreText;
     bool BossDard;
 
+    [SerializeField] 
+    bool SendScoreFlag = false;
+
     public void BosskillFlag() => BossDard = true; 
 
     void Start()
@@ -75,7 +78,11 @@ public class GameManager : MonoBehaviour
         if (BossDard)
         {
             clearScoreText.text = Score.ToString();
-            UnityroomApiClient.Instance.SendScore(1, Score, ScoreboardWriteMode.HighScoreDesc);
+
+            //UnityroomÇÃScoreëóêMóp
+            if(SendScoreFlag)
+                UnityroomApiClient.Instance.SendScore(1, Score, ScoreboardWriteMode.HighScoreDesc);
+
             return GameState.Clear;
         }
            

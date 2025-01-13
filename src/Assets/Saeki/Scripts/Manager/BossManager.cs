@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,8 +28,9 @@ public class BossManager : MonoBehaviour
 
     async void SetUpBossLeader()
     {
-        for(int i = 0; i < bossSub.Length;i++)
-        await UniTask.WaitUntil(() => bossSub[i].IsDestroyed());
+        var token = this.GetCancellationTokenOnDestroy();
+        for (int i = 0; i < bossSub.Length;i++)
+        await UniTask.WaitUntil(() => bossSub[i].IsDestroyed(), cancellationToken: token);
 
         bossEnemyObject.layer = LayerMask.NameToLayer("Enemy");
         bossEnemy.SetSuperMode();
@@ -36,7 +38,8 @@ public class BossManager : MonoBehaviour
 
     async void bossDeadCheck()
     {
-        await UniTask.WaitUntil(() => bossEnemyObject.activeSelf == false);
+        var token = this.GetCancellationTokenOnDestroy();
+        await UniTask.WaitUntil(() => bossEnemyObject.activeSelf == false, cancellationToken: token);
         GameClear();
     }
     
