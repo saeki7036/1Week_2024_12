@@ -15,12 +15,5 @@ public class ShotPatarnBase : MonoBehaviour
     {
 
     }
-    public virtual void PatarnEnter()
-    {
 
-    }
-    public virtual void PatarnExit()
-    {
-
-    }
 }
