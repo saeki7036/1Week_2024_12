@@ -171,4 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbac1c21410c7bb4583414de1318bee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveValue: 23
+  moveValue: 23

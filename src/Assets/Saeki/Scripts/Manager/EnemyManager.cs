@@ -9,22 +9,28 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     TimeTible[] timeTibles;
 
-    int MaxIndex;
-    int CurrentIndex;
-    int NextSpownTime;
+    int maxIndex;
+    int currentIndex;
+    int nextSpownTime;
     void Start()
     {
-        MaxIndex = timeTibles.Length;
-        CurrentIndex = 0;
+        //設定タイムテーブル個数
+        maxIndex = timeTibles.Length;
+
+        //初期値に設定
+        currentIndex = 0;
         if (timeTibles.Length != 0)
-            NextSpownTime = timeTibles[0].GetSpowntime;
+            nextSpownTime = timeTibles[0].GetSpowntime;
     }
     // Update is called once per frame
     void FixedUpdate()
     {
+        //湧き判定
         if(SpownCheck(timeManager.Gettime) == true)
         {
+            //生成処理
             EnemySpown();
+            //次タイムテーブルを設定
             SetNextTimeTible();
         }
                
@@ -32,29 +38,35 @@ public class EnemyManager : MonoBehaviour
 
     bool SpownCheck(int time)
     {
-        if (CurrentIndex >= MaxIndex) return false;
-
-        if (time <= NextSpownTime) return false;
+        //最後のタイムテーブルなら
+        if (currentIndex >= maxIndex) return false;
+        //時間がスポーン時間より小さいなら
+        if (time <= nextSpownTime) return false;
 
         return true;
     }
 
     void EnemySpown()
     {
-        int length = timeTibles[CurrentIndex].GetInfomationLength;
+        //生成回数
+        int length = timeTibles[currentIndex].GetInfomationLength;
 
         for(int i = 0; i < length; i++)
         {
-            var tible = timeTibles[CurrentIndex].GetSpownInfomation(i);
-
+            //構造体情報取得
+            var tible = timeTibles[currentIndex].GetSpownInfomation(i);
+            //敵生成
             Instantiate(tible.Enemy, tible.Point.position, Quaternion.identity);
         } 
     }
 
     void SetNextTimeTible()
     {
-        CurrentIndex++;
-        if (CurrentIndex >= MaxIndex) return;
-        NextSpownTime = timeTibles[CurrentIndex].GetSpowntime;
+        //次のタイムテーブルに
+        currentIndex++;
+        //最後のタイムテーブルならreturn
+        if (currentIndex >= maxIndex) return;
+        //スポーン時間を取得
+        nextSpownTime = timeTibles[currentIndex].GetSpowntime;
     }
 }

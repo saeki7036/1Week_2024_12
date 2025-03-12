@@ -5,9 +5,13 @@ using UnityEngine;
 public class BossEnemyLeader : EnemyBase
 {
 
-    [SerializeField] ShotPatarnBase[] patarns;
-    [SerializeField] int patarnChengeInterval = 600;
-    [SerializeField] SpriteRenderer bossSpriteRenderer;
+    [SerializeField] 
+    ShotPatarnBase[] patarns;
+    [SerializeField] 
+    int patarnChengeInterval = 600;
+    [SerializeField] 
+    SpriteRenderer bossSpriteRenderer;
+
     int patarnChengeCount = 0;
 
     bool superMode = false;
@@ -19,20 +23,23 @@ public class BossEnemyLeader : EnemyBase
     protected override void EnemyUpDate()
     {
         patarnChengeCount++;
+
+        //パターン未設定なら設定する
         if (currentPatarn == null)
             currentPatarn = PatarnChenge();
 
+        //パターン変更チェック
         if (patarnChengeCount >= patarnChengeInterval)
         {
             patarnChengeCount = 0;
             currentPatarn = PatarnChenge();
         }
 
+        //発射条件チェック
         if (currentPatarn != null && currentPatarn.PatarnCeangeLimit(timeCount))     
             BulletShot();
         
-           
-
+        //色変更
         if (this.gameObject.activeSelf)
         {
             DamageColor();
@@ -42,14 +49,17 @@ public class BossEnemyLeader : EnemyBase
     {
         timeCount = 0;
 
+        //全パターン同時に使う
         if (superMode)  
             foreach (ShotPatarnBase Patarn in patarns)
-                Patarn.PatarnPlay(this.transform);     
+                Patarn.PatarnPlay(this.transform);   
+        //現在のパターンのみ使う
         else
             currentPatarn.PatarnPlay(this.transform);
     }
     void DamageColor()
     {
+        //残HPから色変更(減るほど赤)
         float value = HP / maxHP;
         bossSpriteRenderer.color = new Color(1, value, value, 1);
     }

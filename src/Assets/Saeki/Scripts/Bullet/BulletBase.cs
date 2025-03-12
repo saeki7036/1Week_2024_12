@@ -12,6 +12,7 @@ public class BulletBase : MonoBehaviour
     protected float speed = 0.01f;
     [SerializeField]
     int score = 10;
+    
     [SerializeField]
     GameObject BulletDieEffect;
     [SerializeField]
@@ -28,7 +29,7 @@ public class BulletBase : MonoBehaviour
     [SerializeField]
     Scale scale = Scale.normal;
 
-    AudioManager audio => AudioManager.instance;
+    AudioManager Audio => AudioManager.instance;
 
     protected Vector3 vector;
 
@@ -36,17 +37,19 @@ public class BulletBase : MonoBehaviour
 
     void Start()
     {
+        //スケートを設定
         this.transform.localScale = ScaleSetting();
         BulletSetUp();
     }
 
     protected virtual void BulletSetUp()
     {
-
+        return;//基底クラス
     }
 
     Vector3 ScaleSetting()
     {
+        //スケールのパラメータを返す
         switch (scale)
         {
             case Scale.large:
@@ -61,6 +64,7 @@ public class BulletBase : MonoBehaviour
 
     int ScaleScore()
     {
+        //enumパラメータからスコアを返す
         switch (scale)
         {
             case Scale.large:
@@ -72,6 +76,7 @@ public class BulletBase : MonoBehaviour
         }
         return 1;
     }
+
     void ScaleDown()
     {
         switch (scale)
@@ -90,18 +95,22 @@ public class BulletBase : MonoBehaviour
 
     public void KillBullet()
     {
+        //スコア加算
         GameManager.AddScore(score * ScaleScore());
-        DestroyBullet();
 
-        
+        //破壊処理
+        DestroyBullet();
     }
 
     public void SetScale()
     {
+        //スコア加算
         GameManager.AddScore(score * ScaleScore());
+
         ScaleDown();
         Vector3 nextScale = ScaleSetting();
        
+        //スケールが0なら破壊処理
         if (nextScale == Vector3.zero)
             DestroyBullet();
 
@@ -110,16 +119,19 @@ public class BulletBase : MonoBehaviour
 
     void DestroyBullet()
     {
+        //音声再生
         if (DieClip != null)
         {
-            audio.isPlaySE(DieClip);
+            Audio.isPlaySE(DieClip);
         }
         else 
         {
             Debug.Log("音がセットされてないよ");
         }
 
-        GameObject CL_BulletDieEffect = Instantiate(BulletDieEffect,transform.position,Quaternion.identity);
+        //エフェクト生成
+        Instantiate(BulletDieEffect,transform.position,Quaternion.identity);
+
         Destroy(this.gameObject);
     }
 
@@ -128,6 +140,7 @@ public class BulletBase : MonoBehaviour
     {
         if(other.TryGetComponent<PlayerDamageArea>(out PlayerDamageArea player))
         {
+            //プレイヤーの被弾処理
             player.TakeDamage(1);
             Debug.Log("Damage");
             Destroy (this.gameObject);

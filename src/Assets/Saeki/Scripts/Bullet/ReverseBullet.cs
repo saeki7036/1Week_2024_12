@@ -20,8 +20,10 @@ public class ReverseBullet : BulletBase
     {
         var token = this.GetCancellationTokenOnDestroy();
 
+        //インターバル遅延
         await UniTask.Delay(TimeSpan.FromSeconds(Interval), cancellationToken: token);
 
+        //現在とは逆方向に変更
         Vector2 velocityFromPlayer = (rb2D.velocity)* -1;
         rb2D.velocity = velocityFromPlayer.normalized * speed;
     }

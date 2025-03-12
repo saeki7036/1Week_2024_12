@@ -20,8 +20,10 @@ public class HormingBullet : BulletBase
     {
         var token = this.GetCancellationTokenOnDestroy();
 
+        //インターバル遅延
         await UniTask.Delay(TimeSpan.FromSeconds(Interval), cancellationToken: token);
 
+        //プレイヤー方向に変更
         Vector2 velocityFromPlayer = GameManager.Getplayer.transform.position - transform.position;
         rb2D.velocity = velocityFromPlayer.normalized * speed;
     }

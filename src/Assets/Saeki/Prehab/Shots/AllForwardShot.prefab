@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86151d2e3d3a6ab4f969a177e31c2a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 200
+  shotInterval: 200
   bulletSmall: {fileID: 2245274868930637758, guid: 1720d7b94271ae4418c81b6f2f0da181, type: 3}
   aimValue: 560
-  OtherPlayTimeSpan: 0.3
-  OtherPlayCount: 3
+  patarnReportTimeSpan: 0.3
+  patarnReportValue: 3

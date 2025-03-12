@@ -6,6 +6,6 @@ public class SuperAttackBase : MonoBehaviour
 {
     public virtual void PlaySuperAttack()
     {
-       
+        return;//Šî’êƒNƒ‰ƒX
     }
 }

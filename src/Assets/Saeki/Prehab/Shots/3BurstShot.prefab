@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca96f94e9c7402f45a2207aa8f93ec0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 100
+  shotInterval: 100
   bulletPrehab: {fileID: 177135032375817284, guid: 2ae9e8ac3a5f56c4fa5058baf7e01af1, type: 3}
-  OtherPlayTimeSpan: 0.2
-  OtherPlayCount: 3
+  patarnReportTimeSpan: 0.2
+  patarnReportValue: 3

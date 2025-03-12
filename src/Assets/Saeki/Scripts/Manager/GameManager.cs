@@ -9,11 +9,12 @@ public class GameManager : MonoBehaviour
     //staticパラメータを使用
     static GameObject playerObject;
 
+    //プレイヤーのオブジェクト情報をキャッシュ
     public static GameObject Getplayer => playerObject;
 
-    static int Score;
-    public int GetScore => Score;
-    public static void AddScore(int add) => Score += add;
+    static int mainGameScore;
+    public int GetScore => mainGameScore;
+    public static void AddScore(int add) => mainGameScore += add;
     enum GameState
     {
         Before,
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public bool IsMainGameState => gameState == GameState.MainGame;
     public bool IsGameClear => gameState == GameState.Clear;
     public bool IsGameOver => gameState == GameState.GameOver;
+
     [SerializeField]
     Player playerScript;
 
@@ -37,56 +39,68 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI scoreText;
     [SerializeField] 
     TextMeshProUGUI clearScoreText;
-    bool BossDard;
 
+    bool bossDead;
+
+    //trueに設定するとUnityRoomのランキング機能を利用
     [SerializeField] 
-    bool SendScoreFlag = false;
+    bool sendScoreFlag = false;
 
-    public void BosskillFlag() => BossDard = true; 
+    public void BosskillFlag() => bossDead = true; 
 
     void Start()
     {
-        Score = 0;
+        mainGameScore = 0;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         gameState = GameState.MainGame;
-        BossDard = false;
+        bossDead = false;
     }
 
      
     
     void FixedUpdate()
     {
-        scoreText.text = Score.ToString();
+        //スコアText化
+        scoreText.text = mainGameScore.ToString();
+
+        //ゲームフロー変更
         gameState = stateChange();
-        if (IsGameClear) PlayFinishAnimation();
+
+        //ゲームクリア時
+        if (IsGameClear) 
+            PlayFinishAnimation();
     }
 
     void PlayFinishAnimation()
     {
+        //クリア時アニメーションのオブジェクトのアクティブ状態を変更
         if(finishAnimartionObject.activeSelf == false)
             finishAnimartionObject.SetActive(true);
     }
 
     GameState stateChange()
     {
+        //メインゲーム以外なら現在のゲームフローを維持
         if (gameState != GameState.MainGame)
             return gameState;
 
+        //プレイヤー死亡
         if(playerScript.IsDard)
             return GameState.GameOver;
 
-        if (BossDard)
+        //ボス死亡
+        if (bossDead)
         {
-            clearScoreText.text = Score.ToString();
+            //クリア時のスコアで更新
+            clearScoreText.text = mainGameScore.ToString();
 
-            //UnityroomのScore送信用
-            if(SendScoreFlag)
-                UnityroomApiClient.Instance.SendScore(1, Score, ScoreboardWriteMode.HighScoreDesc);
+            //UnityroomのScore送信用(ハイスコア順)
+            if(sendScoreFlag)
+                UnityroomApiClient.Instance.SendScore(1, mainGameScore, ScoreboardWriteMode.HighScoreDesc);
 
             return GameState.Clear;
         }
            
-
         return GameState.MainGame;
     }
 }

@@ -21,8 +21,11 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //ボスかプレイヤーが死ぬまで
         if(gameManager.IsMainGameState)
             time++;
+
+        //時間をTextに出力
         timeText.text = time.ToString();
        
     }
