@@ -2,91 +2,121 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using unityroom.Api;
+
 public class GameManager : MonoBehaviour
 {
     //staticパラメータを使用
+    //プレイヤーのオブジェクト情報をキャッシュ
     static GameObject playerObject;
 
+    //EnemyやBulletの計算に使用
     public static GameObject Getplayer => playerObject;
 
-    static int Score;
-    public int GetScore => Score;
-    public static void AddScore(int add) => Score += add;
-    enum GameState
+    //staticパラメータを使用
+    //スコア管理変数
+    static int mainGameScore;
+   
+    //スコア加算
+    public static void AddScore(int add) => mainGameScore += add;
+
+    enum GameState//ゲームステート
     {
         Before,
         MainGame,
         Clear,
         GameOver
     }
-    [SerializeField]
-    GameState gameState;
-   
-    public bool IsMainGameState => gameState == GameState.MainGame;
-    public bool IsGameClear => gameState == GameState.Clear;
-    public bool IsGameOver => gameState == GameState.GameOver;
-    [SerializeField]
-    Player playerScript;
 
     [SerializeField]
-    GameObject finishAnimartionObject;
+    GameState gameState;//ゲームステート管理変数
+
+    public bool IsMainGameState => gameState == GameState.MainGame;//メインゲームのフラグ判定
+
+    public bool IsGameOver => gameState == GameState.GameOver;//ゲームオーバーのフラグ判定
+
+     bool IsGameClear => gameState == GameState.Clear;//クリアのフラグ判定
+
+    [SerializeField]
+    Player playerScript;//プレイヤーのクラス
+
+    [SerializeField]
+    GameObject finishAnimartionObject;//クリア時のアニメーションのオブジェクト
 
     [SerializeField] 
-    TextMeshProUGUI scoreText;
-    [SerializeField] 
-    TextMeshProUGUI clearScoreText;
-    bool BossDard;
+    TextMeshProUGUI scoreText;//スコア表示テキスト
 
     [SerializeField] 
-    bool SendScoreFlag = false;
+    TextMeshProUGUI clearScoreText;//クリア時のスコア表示テキスト
 
-    public void BosskillFlag() => BossDard = true; 
+    //trueに設定するとUnityRoomのランキング機能を利用
+    [SerializeField] 
+    bool sendScoreFlag = false;
+
+    bool bossDead;//ボスの死亡フラグ
+
+    public void BosskillFlag() => bossDead = true; //ボスの死亡フラグ更新
 
     void Start()
     {
-        Score = 0;
-        playerObject = GameObject.FindGameObjectWithTag("Player");
-        gameState = GameState.MainGame;
-        BossDard = false;
-    }
+        //スコア初期化
+        mainGameScore = 0;
 
-     
+        //Playerをキャッシュ
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        //ゲームステート初期化
+        gameState = GameState.MainGame;
+
+        //ボスの死亡フラグ初期化
+        bossDead = false;
+    }
     
     void FixedUpdate()
     {
-        scoreText.text = Score.ToString();
+        //スコアText化
+        scoreText.text = mainGameScore.ToString();
+
+        //ゲームフロー変更
         gameState = stateChange();
-        if (IsGameClear) PlayFinishAnimation();
+
+        //ゲームクリア時
+        if (IsGameClear) 
+            PlayFinishAnimation();//アニメーション起動
     }
 
     void PlayFinishAnimation()
     {
+        //クリア時アニメーションのオブジェクトのアクティブ状態を変更
         if(finishAnimartionObject.activeSelf == false)
             finishAnimartionObject.SetActive(true);
     }
 
     GameState stateChange()
     {
+        //メインゲーム以外なら現在のゲームフローを維持
         if (gameState != GameState.MainGame)
             return gameState;
 
+        //プレイヤー死亡
         if(playerScript.IsDard)
             return GameState.GameOver;
 
-        if (BossDard)
+        //ボス死亡
+        if (bossDead)
         {
-            clearScoreText.text = Score.ToString();
+            //クリア時のスコアで更新
+            clearScoreText.text = mainGameScore.ToString();
 
-            //UnityroomのScore送信用
-            if(SendScoreFlag)
-                UnityroomApiClient.Instance.SendScore(1, Score, ScoreboardWriteMode.HighScoreDesc);
+            //UnityroomのScore送信用(ハイスコア順)
+            if(sendScoreFlag)
+                UnityroomApiClient.Instance.SendScore(1, mainGameScore, ScoreboardWriteMode.HighScoreDesc);
 
+            //クリア状態
             return GameState.Clear;
         }
-           
 
+        //それ以外はメインゲーム状態
         return GameState.MainGame;
     }
 }

@@ -7,23 +7,29 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField]
-    GameManager gameManager;
-    [SerializeField] TextMeshProUGUI timeText;
-    int time;
+    GameManager gameManager;//マネージャークラス
 
-    public int Gettime => time;
+    [SerializeField] 
+    TextMeshProUGUI timeText;//表示テキスト
+
+    int time;//時間変数
+
+    public int Gettime => time;//時間のゲッター
+
     // Start is called before the first frame update
     void Start()
     {
-        time = 0;
+        time = 0;//初期化
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //ボスかプレイヤーが死ぬまで
         if(gameManager.IsMainGameState)
-            time++;
+            time++;//加算
+
+        //時間をTextに出力
         timeText.text = time.ToString();
-       
     }
 }

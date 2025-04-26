@@ -3,44 +3,79 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AllForwardShot : ShotPatarnBase
 {
-    [SerializeField] GameObject bulletSmall;
-    [SerializeField] float aimValue = 10f;
-    [SerializeField] float OtherPlayTimeSpan = 0.3f;
-    [SerializeField] int OtherPlayCount = 3;
+    [SerializeField]
+    GameObject bulletPrehab;//Bulletのオブジェクト
+
+    [SerializeField] 
+    float aimValue = 560f;//方向計算強度
+
+    [SerializeField]
+    float patarnReportTimeSpan = 0.3f;//発射間隔の遅延時間
+
+    [SerializeField]
+    int patarnReportValue = 3;//発射パターンの起動回数
+
+    //10度ずつ離して36回動かして10度ずつ全方向を指定する
+    const int AllForwardValue = 36;
+
+    //発射処理
     public override void PatarnPlay(Transform enemyTransform)
     {
+        //発射対象の位置を取得
         Vector3 target = GameManager.Getplayer.transform.position;
-        OtherPatarnDelay(target, enemyTransform);
+
+        //UniTask非同期処理起動
+        //発射処理の遅延処理の起動
+        PatarnDelay(target, enemyTransform);
     }
 
-    async void OtherPatarnDelay(Vector3 target, Transform enemyTransform)
+    //発射処理の遅延処理
+    async void PatarnDelay(Vector3 target, Transform enemyTransform)
     {
+        //UniTask用トークン
         var token = this.GetCancellationTokenOnDestroy();
-        for (int i = 0; i < OtherPlayCount; i++)
+
+        //一定回数Delayかけた後に、発射パターンを起動
+        for (int i = 0; i < patarnReportValue; i++)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(OtherPlayTimeSpan), cancellationToken: token);
-            OtherPatarnPlay(target, enemyTransform);
+            //インターバル遅延
+            await UniTask.Delay(TimeSpan.FromSeconds(patarnReportTimeSpan), cancellationToken: token);
+
+            //複数回の発射処理起動
+            RepeatPatarnPlay(target, enemyTransform);
         }
     }
 
-    void OtherPatarnPlay(Vector3 target, Transform enemyTransform)
+    //複数回の発射処理
+    void RepeatPatarnPlay(Vector3 target, Transform enemyTransform)
     {
-        for (int i = 0; i <= 36; i++)
-        {
-            if (enemyTransform == null)
-                break;
+        //nullチェック
+        if (enemyTransform == null)
+            return;
 
+        //10度ずつずらす
+        for (int i = 0; i <= AllForwardValue; i++)
+        {
+            //基準となる方向を計算
             Vector2 dirTarget = target - enemyTransform.position;
 
-            GameObject bullet = Instantiate(bulletSmall, enemyTransform.position, Quaternion.identity);
+            //オブジェクト生成
+            GameObject bullet = Instantiate(bulletPrehab, enemyTransform.position, Quaternion.identity);
+
+            //Rigidbody2D取得
             Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
 
+            //発射方向計算
             float angleRadians = (aimValue * i) * Mathf.Deg2Rad;
+
+            //発射方向計算
             Vector2 rotate = Quaternion.Euler(Vector3.forward * angleRadians) * dirTarget.normalized;
 
+            //発射方向代入
             bulletRB.velocity = rotate;
         }
     }
