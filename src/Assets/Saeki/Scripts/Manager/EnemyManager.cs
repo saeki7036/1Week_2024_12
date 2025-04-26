@@ -5,13 +5,17 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField]
-    TimeManager timeManager;
-    [SerializeField]
-    TimeTible[] timeTibles;
+    TimeManager timeManager;//時間管理クラス
 
-    int maxIndex;
-    int currentIndex;
-    int nextSpownTime;
+    [SerializeField]
+    TimeTible[] timeTibles;//タイムテーブル
+
+    int maxIndex;//設定タイムテーブル個数
+
+    int currentIndex;//現在のタイムテーブル
+
+    int nextSpownTime;//次のスポーン時間
+
     void Start()
     {
         //設定タイムテーブル個数
@@ -19,9 +23,12 @@ public class EnemyManager : MonoBehaviour
 
         //初期値に設定
         currentIndex = 0;
+
+        //タイムテーブルが空でなければ
         if (timeTibles.Length != 0)
-            nextSpownTime = timeTibles[0].GetSpowntime;
+            nextSpownTime = timeTibles[0].GetSpowntime;//タイムテーブルの起動時間の最初を入れる
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -30,25 +37,30 @@ public class EnemyManager : MonoBehaviour
         {
             //生成処理
             EnemySpown();
+
             //次タイムテーブルを設定
             SetNextTimeTible();
         }
                
     }
 
+    //スポーン判定
     bool SpownCheck(int time)
     {
         //最後のタイムテーブルなら
         if (currentIndex >= maxIndex) return false;
+
         //時間がスポーン時間より小さいなら
         if (time <= nextSpownTime) return false;
 
+        //それ以外なら
         return true;
     }
 
+    //生成処理
     void EnemySpown()
     {
-        //生成回数
+        //生成回数取得
         int length = timeTibles[currentIndex].GetInfomationLength;
 
         for(int i = 0; i < length; i++)
@@ -60,12 +72,15 @@ public class EnemyManager : MonoBehaviour
         } 
     }
 
+    //タイムテーブル更新
     void SetNextTimeTible()
     {
         //次のタイムテーブルに
         currentIndex++;
+
         //最後のタイムテーブルならreturn
         if (currentIndex >= maxIndex) return;
+
         //スポーン時間を取得
         nextSpownTime = timeTibles[currentIndex].GetSpowntime;
     }

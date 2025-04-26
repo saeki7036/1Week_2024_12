@@ -2,61 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using unityroom.Api;
+
 public class GameManager : MonoBehaviour
 {
     //staticパラメータを使用
+    //プレイヤーのオブジェクト情報をキャッシュ
     static GameObject playerObject;
 
-    //プレイヤーのオブジェクト情報をキャッシュ
+    //EnemyやBulletの計算に使用
     public static GameObject Getplayer => playerObject;
 
+    //staticパラメータを使用
+    //スコア管理変数
     static int mainGameScore;
-    public int GetScore => mainGameScore;
+   
+    //スコア加算
     public static void AddScore(int add) => mainGameScore += add;
-    enum GameState
+
+    enum GameState//ゲームステート
     {
         Before,
         MainGame,
         Clear,
         GameOver
     }
-    [SerializeField]
-    GameState gameState;
-   
-    public bool IsMainGameState => gameState == GameState.MainGame;
-    public bool IsGameClear => gameState == GameState.Clear;
-    public bool IsGameOver => gameState == GameState.GameOver;
 
     [SerializeField]
-    Player playerScript;
+    GameState gameState;//ゲームステート管理変数
+
+    public bool IsMainGameState => gameState == GameState.MainGame;//メインゲームのフラグ判定
+
+    public bool IsGameOver => gameState == GameState.GameOver;//ゲームオーバーのフラグ判定
+
+     bool IsGameClear => gameState == GameState.Clear;//クリアのフラグ判定
 
     [SerializeField]
-    GameObject finishAnimartionObject;
+    Player playerScript;//プレイヤーのクラス
+
+    [SerializeField]
+    GameObject finishAnimartionObject;//クリア時のアニメーションのオブジェクト
 
     [SerializeField] 
-    TextMeshProUGUI scoreText;
-    [SerializeField] 
-    TextMeshProUGUI clearScoreText;
+    TextMeshProUGUI scoreText;//スコア表示テキスト
 
-    bool bossDead;
+    [SerializeField] 
+    TextMeshProUGUI clearScoreText;//クリア時のスコア表示テキスト
 
     //trueに設定するとUnityRoomのランキング機能を利用
     [SerializeField] 
     bool sendScoreFlag = false;
 
-    public void BosskillFlag() => bossDead = true; 
+    bool bossDead;//ボスの死亡フラグ
+
+    public void BosskillFlag() => bossDead = true; //ボスの死亡フラグ更新
 
     void Start()
     {
+        //スコア初期化
         mainGameScore = 0;
+
+        //Playerをキャッシュ
         playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        //ゲームステート初期化
         gameState = GameState.MainGame;
+
+        //ボスの死亡フラグ初期化
         bossDead = false;
     }
-
-     
     
     void FixedUpdate()
     {
@@ -68,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         //ゲームクリア時
         if (IsGameClear) 
-            PlayFinishAnimation();
+            PlayFinishAnimation();//アニメーション起動
     }
 
     void PlayFinishAnimation()
@@ -98,9 +112,11 @@ public class GameManager : MonoBehaviour
             if(sendScoreFlag)
                 UnityroomApiClient.Instance.SendScore(1, mainGameScore, ScoreboardWriteMode.HighScoreDesc);
 
+            //クリア状態
             return GameState.Clear;
         }
-           
+
+        //それ以外はメインゲーム状態
         return GameState.MainGame;
     }
 }

@@ -3,39 +3,50 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BurstShot : ShotPatarnBase
 {
     [SerializeField] 
-    GameObject bulletPrehab;
+    GameObject bulletPrehab;//Bulletのオブジェクト
 
     [SerializeField]
-    float patarnReportTimeSpan = 0.2f;
+    float patarnReportTimeSpan = 0.2f;//発射間隔の遅延時間
 
     [SerializeField]
-    int patarnReportValue = 3;
+    int patarnReportValue = 3;//発射パターンの起動回数
 
+    //発射処理
     public override void PatarnPlay(Transform enemyTransform)
     {
+        //発射対象の位置を取得
         Vector3 target = GameManager.Getplayer.transform.position;
-        OtherPatarnDelay(target, enemyTransform);
+
+        //UniTask非同期処理起動
+        //発射処理の遅延処理の起動
+        PatarnDelay(target, enemyTransform);
     }
 
-    async void OtherPatarnDelay(Vector3 target, Transform enemyTransform)
+    //発射処理の遅延処理
+    async void PatarnDelay(Vector3 target, Transform enemyTransform)
     {
+        //UniTask用トークン
         var token = this.GetCancellationTokenOnDestroy();
 
         //一定回数Delayかけた後に、発射パターンを起動
         for (int i = 0; i < patarnReportValue; i++)
         {
+            //インターバル遅延
             await UniTask.Delay(TimeSpan.FromSeconds(patarnReportTimeSpan), cancellationToken: token);
-            OtherPatarnPlay(target, enemyTransform);
+
+            //複数回の発射処理起動
+            RepeatPatarnPlay(target, enemyTransform);
         }
     }
 
-    void OtherPatarnPlay(Vector3 target, Transform enemyTransform)
+    //複数回の発射処理
+    void RepeatPatarnPlay(Vector3 target, Transform enemyTransform)
     {
+        //nullチェック
         if (enemyTransform == null)
             return;
 
@@ -53,6 +64,5 @@ public class BurstShot : ShotPatarnBase
 
         //発射方向代入
         bulletRB.velocity = rotate;
-
     }
 }

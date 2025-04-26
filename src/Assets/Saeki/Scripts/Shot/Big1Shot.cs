@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Big1Shot : ShotPatarnBase
 {
-    [SerializeField] GameObject bulletPrehab;
+    [SerializeField] GameObject bulletPrehab;//Bulletのオブジェクト
 
     //単体テストOK
-
+    //発射処理
     public override void PatarnPlay(Transform enemyTransform)
     {
+        //nullチェック
         if (enemyTransform == null)
             return;
 
+        //発射対象の位置を取得
         Vector3 target = GameManager.Getplayer.transform.position;
 
         //プレイヤーに飛ばす方向を計算

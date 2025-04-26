@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotInterval: 200
   bulletSmall: {fileID: 2245274868930637758, guid: 1720d7b94271ae4418c81b6f2f0da181, type: 3}
+  bulletPrehab: {fileID: 2245274868930637758, guid: 1720d7b94271ae4418c81b6f2f0da181, type: 3}
   aimValue: 560
   patarnReportTimeSpan: 0.3
   patarnReportValue: 3

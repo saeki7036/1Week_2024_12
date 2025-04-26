@@ -2,35 +2,45 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class ShotBigHorming : ShotPatarnBase
 {
     [SerializeField] 
-    GameObject bulletSmall;
-    [SerializeField] 
-    GameObject bulletLarge;
+    GameObject bulletSmall;//Bulletのオブジェクト(小さい弾)
 
     [SerializeField] 
-    float aimValue = 10f;
+    GameObject bulletLarge;//Bulletのオブジェクト(大きい弾)
 
     [SerializeField] 
-    float patarnReportTimeSpan = 0.2f;
+    float aimValue = 560f;//方向計算強度
 
     [SerializeField] 
-    int patarnReportValue = 5;
+    float patarnReportTimeSpan = 0.2f;//発射間隔の遅延時間
 
+    [SerializeField] 
+    int patarnReportValue = 5;//発射パターンの起動回数
+
+    //プレイヤーの方向以外の方向にばら撒くため3～33を指定
+    //O～2及び34～36の間はプレイヤーの方向になるため発射させない
+    const int MinBackValue = 3,
+              MaxBackValue = 33;
+
+    //全体の発射処理
     public override void PatarnPlay(Transform enemyTransform)
     {
+        //発射対象の位置を取得
         Vector3 target = GameManager.Getplayer.transform.position;
 
-        //相手に向かって直線に発射するパターン
+        //相手に向かって直線に発射するパターン起動
         MainPatarnPlay(target, enemyTransform);
-        //相手以外の方向に扇形に発射するパターン
+
+        //UniTask非同期処理起動
+        //相手以外の方向に扇形に発射するパターン起動
         OtherPatarnDelay(target, enemyTransform);
     }
 
+    //発射処理(プレイヤーに1方向)
     void MainPatarnPlay(Vector3 target, Transform enemyTransform)
     {
         //プレイヤーに飛ばす方向を計算
@@ -49,28 +59,33 @@ public class ShotBigHorming : ShotPatarnBase
         bulletRB.velocity = rotate;
     }
 
-
-
+    //発射処理の遅延処理
     async void OtherPatarnDelay(Vector3 target, Transform enemyTransform) 
     {
+        //UniTask用トークン
         var token = this.GetCancellationTokenOnDestroy();
 
         //一定回数Delayかけた後に、発射パターンを起動
         for (int i = 0;i < patarnReportValue; i++)
         {
+            //インターバル遅延
             await UniTask.Delay(TimeSpan.FromSeconds(patarnReportTimeSpan), cancellationToken: token);
+
+            //発射処理起動
             OtherPatarnPlay(target, enemyTransform);
         }
     }
 
+    //発射処理(プレイヤーじゃない方向に扇状に発射)
     void OtherPatarnPlay(Vector3 target, Transform enemyTransform)
     {
-        //プレイヤーの方向以外の方向にばら撒くため3～33を指定
-        for (int i = 3; i <= 33; i++)
-        {
-            if (enemyTransform == null)
-                break;
+        //nullチェック
+        if (enemyTransform == null)
+            return;
 
+        //プレイヤーの方向以外の方向にばら撒くため3～33を指定
+        for (int i = MinBackValue; i <= MaxBackValue; i++)
+        {
             //基準となる方向を計算
             Vector2 dirTarget = target - enemyTransform.position;
 
@@ -82,6 +97,8 @@ public class ShotBigHorming : ShotPatarnBase
 
             //発射方向計算
             float angleRadians = (aimValue * i) * Mathf.Deg2Rad;
+
+            //発射方向計算
             Vector2 rotate = Quaternion.Euler(Vector3.forward * angleRadians) * dirTarget.normalized;
 
             //発射方向代入

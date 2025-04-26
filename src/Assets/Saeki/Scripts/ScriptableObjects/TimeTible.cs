@@ -8,7 +8,7 @@ public class TimeTible : ScriptableObject
     [SerializeField]
     int spownTime;
 
-    public int GetSpowntime => spownTime;
+    public int GetSpowntime => spownTime;//出現時間を取得
 
     [Header("出現位置")]
     [SerializeField]
@@ -24,10 +24,10 @@ public class TimeTible : ScriptableObject
         [SerializeField]
         GameObject EnemyObject;
 
-        public readonly Transform Point => spownPoint.transform;
-        public readonly GameObject Enemy => EnemyObject;
+        public readonly Transform Point => spownPoint.transform;//出現位置を取得
+        public readonly GameObject Enemy => EnemyObject;//出現する敵を取得
     }
 
-    public int GetInfomationLength => spownInfos.Length;
-    public SpownInfo GetSpownInfomation(int number) => spownInfos[number];
+    public int GetInfomationLength => spownInfos.Length;//出現情報の量を取得
+    public SpownInfo GetSpownInfomation(int number) => spownInfos[number];//出現情報を取得
 }

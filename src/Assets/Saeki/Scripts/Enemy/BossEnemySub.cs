@@ -1,49 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class BossEnemySub : EnemyBase
 {
     [SerializeField] 
-    ShotPatarnBase patarn;
+    ShotPatarnBase patarn;//行動パターン
+
     [SerializeField] 
-    Transform shottingTransform;
+    Transform shottingTransform;//発射位置の座標
+
     [SerializeField] 
-    SpriteRenderer bossArmSpriteRenderer;
+    SpriteRenderer bossArmSpriteRenderer;//色変更に使うレンダラー
+
+    float maxHP;//最大体力
+
+    //パラメータ設定
+    protected override void EnemySetUp()
+    {
+        maxHP = HP;//最大体力取得
+    }
+
+    //アップデート
     protected override void EnemyUpDate()
     {
         //発射条件チェック
-        if (patarn.PatarnCeangeLimit(timeCount))
-            BulletShot();
+        if (patarn.PatarnCeangeLimit(shotTimeCount))
+            BulletShot();//発射処理
 
-        //色変更
+        //オブジェクトが表示されているなら色変更
         if (this.gameObject.activeSelf)
         {
+            //色変更
             DamageColor();
         }
     }
+
+    //発射処理
     void BulletShot()
     {
-        timeCount = 0;
+        //カウント初期化
+        shotTimeCount = 0;
+
+        //発射パターン起動
         patarn.PatarnPlay(shottingTransform);
     }
 
+    //残HPから色変更(減るほど赤)
     void DamageColor()
     {
-        //残HPから色変更(減るほど赤)
+        //割合計算
         float value = HP / maxHP;
+
+        //GとBがHPが減るにつれて数値が下がり赤くなる
         bossArmSpriteRenderer.color = new Color(1, value, value, 1);
     }
+
+    //死亡処理
     protected override void EnemyDead()
     {
+        //スコア加算
         GameManager.AddScore(score);
+
+        //オブジェクト自体を非表示に
         this.gameObject.SetActive(false);
     }
 
     /// <summary>
-    /// 死亡判定
+    /// 破壊判定
     /// </summary>
-    /// <returns>死んだらtrue</returns>
+    /// <returns>破壊していたらtrue</returns>
     public bool IsDestroyed() => HP <= 0;
 }

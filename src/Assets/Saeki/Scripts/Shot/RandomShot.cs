@@ -7,46 +7,66 @@ using UnityEngine.Serialization;
 
 public class RandomShot : ShotPatarnBase
 {
-    [SerializeField] 
-    GameObject bulletSmall;
+    [SerializeField]
+    GameObject bulletPrehab;//Bulletのオブジェクト
 
     [SerializeField] 
-    float aimValue = 560f;
+    float aimValue = 560f;//方向計算強度
 
     [SerializeField] 
-    float patarnReportTimeSpan = 0.1f;
+    float patarnReportTimeSpan = 0.1f;//発射間隔の遅延時間
 
     [SerializeField]
-    int patarnReportValue = 50;
-    
-    [SerializeField]
-    int oneSetBulletCount = 3;
+    int patarnReportValue = 50;//発射パターンの起動回数
 
+    [SerializeField]
+    int oneSetBulletCount = 3;//パターン毎の発射回数
+
+    //ランダムパラメータのための上限、下限。
+    //数値1ごとに10度を想定
+    const int RandomMinValue = 0, 
+              RandomMaxValue = 37;
+
+    //ランダムな方向を取得(0～36の間)
+    int RandomAngle => UnityEngine.Random.Range(RandomMinValue, RandomMaxValue);
+
+    //発射処理
     public override void PatarnPlay(Transform enemyTransform)
     {
-        OtherPatarnDelay(enemyTransform);
+        //UniTask非同期処理起動
+        //発射処理の遅延処理の起動
+        PatarnDelay(enemyTransform);
     }
 
-    async void OtherPatarnDelay(Transform enemyTransform)
+    //発射処理の遅延処理
+    async void PatarnDelay(Transform enemyTransform)
     {
+        //UniTask用トークン
         var token = this.GetCancellationTokenOnDestroy();
 
         //一定回数Delayかけた後に、発射パターンを起動
         for (int i = 0; i < patarnReportValue; i++)
         {
+            //インターバル遅延
             await UniTask.Delay(TimeSpan.FromSeconds(patarnReportTimeSpan), cancellationToken: token);
-            OtherPatarnPlay(enemyTransform);
+
+            //複数回の発射処理起動
+            RepeatPatarnPlay(enemyTransform);
         }
     }
 
-    void OtherPatarnPlay(Transform enemyTransform)
+    //複数回の発射処理
+    void RepeatPatarnPlay(Transform enemyTransform)
     {
+        //プレイヤーのnullチェック
         if (GameManager.Getplayer == null) 
             return;
 
+        //nullチェック
         if (enemyTransform == null)
             return;
 
+        //発射対象の位置を取得
         Vector3 target = GameManager.Getplayer.transform.position;
 
         //発射回数分ループ
@@ -56,13 +76,13 @@ public class RandomShot : ShotPatarnBase
             Vector2 dirTarget = target - enemyTransform.position;
 
             //オブジェクト生成
-            GameObject bullet = Instantiate(bulletSmall, enemyTransform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrehab, enemyTransform.position, Quaternion.identity);
 
             //Rigidbody2D取得
             Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
 
             //ランダムに方向を指定
-            float angleRadians = (aimValue * UnityEngine.Random.Range(0,37)) * Mathf.Deg2Rad;
+            float angleRadians = (aimValue * RandomAngle) * Mathf.Deg2Rad;
 
             //発射方向計算
             Vector2 rotate = Quaternion.Euler(Vector3.forward * angleRadians) * dirTarget.normalized;
